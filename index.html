@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Vansh ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+    margin:0;
+    font-family:'Quicksand',sans-serif;
+    background:linear-gradient(to bottom,#ffb6c1,#ffe4e9);
+    min-height:100vh;
+    overflow:hidden;
+}
+
+/* Pages */
+.page{
+    position:absolute;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+.page.active{display:flex;}
+
+.card{
+    background:white;
+    border-radius:30px;
+    padding:30px;
+    max-width:400px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(255,77,109,.35);
+}
+
+h1{color:#e91e63;margin-bottom:12px}
+
+p{
+    color:#555;
+    font-size:17px;
+    line-height:1.7;
+}
+
+/* Big message */
+.big-msg{
+    font-size:20px;
+    font-weight:600;
+    color:#e91e63;
+    margin:15px 0;
+    min-height:50px;
+}
+
+/* Buttons */
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:15px;
+    position:relative;
+}
+
+button{
+    padding:12px 26px;
+    font-size:17px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+#yes{
+    background:linear-gradient(to right,#ff416c,#ff4b2b);
+    color:white;
+}
+
+#no{
+    background:#f1f1f1;
+    color:#555;
+    position:relative;
+}
+
+.big-yes{transform:scale(1.3);}
+.small-no{transform:scale(0.6);}
+
+/* Hearts */
+.heart{
+    position:fixed;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    0%{transform:translateY(110vh);opacity:1}
+    100%{transform:translateY(-10vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgmusic" loop volume="0.4">
+  <source src="Teri Meri Kahaani Gabbar Is Back 320 Kbps.mp3" type="audio/mpeg">
+</audio>
+<audio id="heartbeat">
+  <source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active">
+<div class="card">
+<h1>Hey Vanshuu ❤️</h1>
+<p>I made something special just for you 💕</p>
+<button onclick="next()">Next 💖</button>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<div class="card">
+<h1>About You 💞</h1>
+<p>
+You have this quiet way of making everything better ✨<br>
+Even on the most ordinary days, your presence brings calm to my heart 💗<br><br>
+You make me smile without trying,<br>
+and somehow, just knowing you’re there makes my world feel lighter 🌸
+</p>
+<button onclick="next()">Next ➜</button>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+<div class="card">
+<h1>My Favorite Feeling 💖</h1>
+<p>
+Somewhere along the way, without me even realizing it,<br>
+you became my comfort and my smile 🌸<br><br>
+In your presence, everything feels a little more peaceful,<br>
+and my heart feels a little more at home 💕<br><br>
+Being with you doesn’t feel forced or complicated,<br>
+it just feels right ✨
+</p>
+<button onclick="next()">Next ➜</button>
+</div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+<div class="card">
+<h1>A Small Confession 💌</h1>
+<p>
+I didn’t plan this… it just happened 💕<br><br>
+Somewhere between our conversations,<br>
+our laughs, and those little moments that meant more than they should have,<br>
+my feelings quietly grew 🌸<br><br>
+I didn’t realize when it started,<br>
+but I know now that my heart chose you<br>
+without asking for permission ✨
+</p>
+<button onclick="next()">Next ➜</button>
+</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+<div class="card">
+<h1>This Is Me 💗</h1>
+<p>
+This is me, being honest with my heart ✨<br>
+This is me, gathering the courage to say what I feel 💕<br><br>
+I may not have all the perfect words,<br>
+but every feeling I have is real and true 🌸<br><br>
+This is me, standing here with a hopeful smile,<br>
+being brave… and being in love 💖
+</p>
+
+<button onclick="next()">One Last Page 💫</button>
+</div>
+</div>
+
+<!-- PAGE 6 : QUESTION -->
+<div class="page">
+<div class="card" id="proposal">
+<h1>So Vansh… 💍</h1>
+<p>Will you be my Valentine? 🌹</p>
+
+<div id="message" class="big-msg"></div>
+
+<div class="buttons">
+    <button id="yes" onclick="yes()">YES 💘</button>
+    <button id="no" onclick="noClick()">NO 🙈</button>
+</div>
+</div>
+</div>
+
+<script>
+const pages=document.querySelectorAll(".page");
+let index=0;
+let noCount=0;
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const msg=document.getElementById("message");
+document.addEventListener("click", () => {
+    bgmusic.currentTime = 40; // start from 1 min 30 sec
+    bgmusic.play().catch(() => {});
+}, { once: true });
+function next(){
+    pages[index].classList.remove("active");
+    index++;
+    pages[index].classList.add("active");
+}
+
+function noClick(){
+    noCount++;
+
+    if(noCount===1){
+        msg.innerText="Hey… think again 🥺💗";
+        noBtn.innerText="Still NO?";
+    }
+    else if(noCount===2){
+        msg.innerText="I promise I’ll make you smile 💕";
+        noBtn.innerText="Are you sure?";
+    }
+    else if(noCount===3){
+        msg.innerText="This is hurting my heart a little 💔";
+        noBtn.innerText="Last chance…";
+    }
+    else if(noCount>=4 && noCount<=6){
+        msg.innerText="Okay fine… try catching this button 😌";
+        noBtn.style.position="absolute";
+        noBtn.style.left=Math.random()*260+"px";
+        noBtn.style.top=Math.random()*90+"px";
+    }
+    else{
+        msg.innerText="You don’t have any other option now 😌💖";
+        noBtn.classList.add("small-no");
+        yesBtn.classList.add("big-yes");
+        noBtn.innerText="YES 💖";
+        noBtn.onclick=yes;
+    }
+}
+
+function yes(){
+    heartbeat.currentTime=0;
+    heartbeat.play();
+
+    pages[index].classList.remove("active");
+    const end=document.createElement("div");
+    end.className="page active";
+    end.innerHTML=`
+    <div class="card">
+        <h1>I Love You ❤️</h1>
+       <p>
+OMG!!! You said YES 😍💖<br>
+I’m sooo sooo happy right now!!! ✨🥰<br>
+My heart can’t stop smiling 💕
+</p>
+
+    </div>`;
+    document.body.appendChild(end);
+}
+
+/* Hearts */
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},300);
+</script>
+
+</body>
+</html>
